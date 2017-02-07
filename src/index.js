@@ -55,7 +55,7 @@ function returnFnResult(fn) {
 function returnCounter(number) {
     number = number || 0;
 
-    return function F() {
+    return function() {
         return ++number;
     }
 }
