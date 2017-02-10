@@ -84,9 +84,10 @@ function getEnumProps(obj) {
  */
 function upperProps(obj) {
     var arr = [];
+    var keys = Object.keys(obj);
 
-    for (var prop in obj) {
-        arr.push(prop.toUpperCase());
+    for (var i = 0; i < keys.length; i++) {
+        arr.push(keys[i].toUpperCase());
     }
 
     return arr;
