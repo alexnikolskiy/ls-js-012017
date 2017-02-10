@@ -86,9 +86,7 @@ function upperProps(obj) {
     var arr = [];
 
     for (var prop in obj) {
-        if (obj.hasOwnProperty(prop)) {
-            arr.push(prop.toUpperCase());
-        }
+        arr.push(prop.toUpperCase());
     }
 
     return arr;
