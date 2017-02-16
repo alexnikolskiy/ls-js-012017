@@ -156,12 +156,8 @@ function deleteTextNodesRecursive(where) {
  *   texts: 3
  * }
  */
-function collectDOMStat(root) {
-    let obj = {
-        tags: {},
-        classes: {},
-        texts: 0
-    };
+function collectDOMStat(root, obj) {
+    obj = obj || { tags: {}, classes: {}, texts: 0 };
 
     for (let child of root.childNodes) {
         if (child.nodeType == Element.TEXT_NODE) {
@@ -173,20 +169,8 @@ function collectDOMStat(root) {
             });
         }
         if (child.childNodes.length) {
-            obj = sum(obj, collectDOMStat(child));
+            obj = collectDOMStat(child, obj);
         }
-    }
-
-    function sum(obj1, obj2) {
-        for (let key of Object.keys(obj2)) {
-            if (typeof obj2[key] == 'object') {
-                sum(obj1[key], obj2[key]);
-            } else {
-                obj1[key] = key in obj1 ? obj1[key] + obj2[key] : obj2[key];
-            }
-        }
-
-        return obj1;
     }
 
     return obj;
