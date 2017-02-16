@@ -157,7 +157,6 @@ function deleteTextNodesRecursive(where) {
  * }
  */
 function collectDOMStat(root, obj) {
-
     obj = obj || { tags: {}, classes: {}, texts: 0 };
 
     for (let child of root.childNodes) {
