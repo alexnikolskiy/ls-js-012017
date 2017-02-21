@@ -53,30 +53,29 @@ function createDiv() {
  * @param {Element} target
  */
 function addListeners(target) {
+    let coords;
+    let shiftX;
+    let shiftY;
 
-    target.onmousedown = function(e) {
-
-        let coords = e.target.getBoundingClientRect();
-        let shiftX = e.pageX - coords.left;
-        let shiftY = e.pageY - coords.top;
-
-        moveAt(e);
+    target.addEventListener('mousedown', e => {
+        coords = e.target.getBoundingClientRect();
+        shiftX = e.pageX - coords.left;
+        shiftY = e.pageY - coords.top;
+        let rect = e.target;
 
         function moveAt(e) {
-            e.target.style.left = e.pageX - shiftX + 'px';
-            e.target.style.top = e.pageY - shiftY + 'px';
+            rect.style.left = e.pageX - shiftX + 'px';
+            rect.style.top = e.pageY - shiftY + 'px';
         }
 
-        document.onmousemove = function(e) {
+        target.addEventListener('mousemove', e => {
             moveAt(e);
-        };
+        });
 
-        e.target.onmouseup = function() {
-            document.onmousemove = null;
-            e.target.onmouseup = null;
-        };
-
-    };
+        target.addEventListener('mouseup', e => {
+            rect = null;
+        });
+    });
 
     target.ondragstart = function() {
         return false;
