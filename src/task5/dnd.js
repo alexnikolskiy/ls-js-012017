@@ -72,7 +72,7 @@ function addListeners(target) {
             moveAt(e);
         });
 
-        target.addEventListener('mouseup', e => {
+        target.addEventListener('mouseup', () => {
             rect = null;
         });
     });

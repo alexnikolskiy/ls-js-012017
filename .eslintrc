@@ -13,7 +13,8 @@
     "resource": true,
     "asset": true,
     "rempl": true,
-    "Proxy": true
+    "Proxy": true,
+    "Promise": true
   },
   "extends": [
     "eslint:recommended"
