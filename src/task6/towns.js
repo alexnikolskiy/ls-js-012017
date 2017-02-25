@@ -60,35 +60,41 @@ let loadingBlock = homeworkContainer.querySelector('#loading-block');
 let filterBlock = homeworkContainer.querySelector('#filter-block');
 let filterInput = homeworkContainer.querySelector('#filter-input');
 let filterResult = homeworkContainer.querySelector('#filter-result');
+let townsPromise;
+
+load();
 
 filterInput.addEventListener('keyup', function() {
     let value = this.value.trim();
-    let towns = townsList.filter(item => {
-        return isMatching(item.name, value);
-    });
 
     filterResult.innerHTML = '';
     if (!value.length) {
         return false;
     }
 
-    towns.forEach(item => {
-        let span = document.createElement('span');
+    townsPromise.then(towns => {
+        let townsList = towns.filter(item => {
+            return isMatching(item.name, value);
+        });
 
-        span.textContent = item.name;
-        span.style.display = 'block';
-        filterResult.appendChild(span);
+        townsList.forEach(item => {
+            let span = document.createElement('span');
+
+            span.textContent = item.name;
+            span.style.display = 'block';
+            filterResult.appendChild(span);
+        });
     });
 });
 
-let townsList;
+function load() {
+    townsPromise = loadTowns();
 
-document.addEventListener('DOMContentLoaded', function() {
-    loadTowns().then(towns => {
+    townsPromise.then(() => {
         loadingBlock.style.display = 'none';
         filterBlock.style.display = 'block';
-        townsList = towns;
     }).catch(error => {
+
         filterBlock.style.display = 'none';
         loadingBlock.innerHTML = '';
 
@@ -101,11 +107,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         btn.textContent = 'Повторить';
         btn.addEventListener('click', () => {
-            document.dispatchEvent(new CustomEvent('DOMContentLoaded'))
+            load();
         });
         loadingBlock.appendChild(btn);
     });
-});
+}
 
 export {
     loadTowns,

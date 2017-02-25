@@ -15,7 +15,7 @@ loaders.push({
 module.exports = {
     entry: {
         main: './src/index.js',
-        cookie: './src/cookie.js'
+        dnd: './src/dnd.js'
     },
     output: {
         filename: '[chunkhash].js',
@@ -39,10 +39,10 @@ module.exports = {
             chunks: ['main']
         }),
         new HtmlPlugin({
-            title: 'Cookie editor',
-            template: 'cookie.hbs',
-            filename: 'cookie.html',
-            chunks: ['cookie']
+            title: 'Div Drag And Drop',
+            template: 'dnd.hbs',
+            filename: 'dnd.html',
+            chunks: ['dnd']
         }),
         new CleanWebpackPlugin(['dist'])
     ]
