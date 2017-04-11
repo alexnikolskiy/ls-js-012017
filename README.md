@@ -1,4 +1,6 @@
-## LoftSchool example project
+## Loftschool JS homeworks
+
+Домашние работы в рамках курса "Комплексное обучение JavaScript" школы онлайн-образования <a href="https://loftschool.com/course/javascript">LoftSchool</a>.
 
 ### Доступные команды
 
